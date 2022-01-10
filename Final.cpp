@@ -71,13 +71,13 @@ istream& operator>> (istream& stream, Date& date)
 	if (stream)
 	{
 		string str;
-		stream >> str;		// сначала получим дату целиком
+		stream >> str;		// СЃРЅР°С‡Р°Р»Р° РїРѕР»СѓС‡РёРј РґР°С‚Сѓ С†РµР»РёРєРѕРј
 		
 		stringstream newStream;
-		newStream << str;	// переведём дату обратно в потоковый формат
+		newStream << str;	// РїРµСЂРµРІРµРґС‘Рј РґР°С‚Сѓ РѕР±СЂР°С‚РЅРѕ РІ РїРѕС‚РѕРєРѕРІС‹Р№ С„РѕСЂРјР°С‚
 		newStream >> y >> s1 >> m >> s2 >> d;
 		
-		if(newStream && newStream.peek() == EOF)//если с потоком всё хорошо и там больше ничего нет (приведение потока к формату bool)
+		if(newStream && newStream.peek() == EOF)//РµСЃР»Рё СЃ РїРѕС‚РѕРєРѕРј РІСЃС‘ С…РѕСЂРѕС€Рѕ Рё С‚Р°Рј Р±РѕР»СЊС€Рµ РЅРёС‡РµРіРѕ РЅРµС‚ (РїСЂРёРІРµРґРµРЅРёРµ РїРѕС‚РѕРєР° Рє С„РѕСЂРјР°С‚Сѓ bool)
 		{
 			if (s1 == '-' && s2 == '-')
 			{
@@ -92,12 +92,12 @@ istream& operator>> (istream& stream, Date& date)
 
 class Database {
 public:
-	// Добавить событие
+	// Р”РѕР±Р°РІРёС‚СЊ СЃРѕР±С‹С‚РёРµ
   	void AddEvent(const Date& date, const string& event){
 		DateEvents[date].insert(event);
   	};
   	
-  	// Удалить событие
+  	// РЈРґР°Р»РёС‚СЊ СЃРѕР±С‹С‚РёРµ
   	bool DeleteEvent(const Date& date, const string& event)
 	{
   		if (DateEvents[date].count(event))
@@ -111,7 +111,7 @@ public:
   			return false;	
   	}
   	
-  	// Удалить все события в указанную дату
+  	// РЈРґР°Р»РёС‚СЊ РІСЃРµ СЃРѕР±С‹С‚РёСЏ РІ СѓРєР°Р·Р°РЅРЅСѓСЋ РґР°С‚Сѓ
   	int  DeleteDate(const Date& date)
   	{
   		int N = DateEvents[date].size();
@@ -119,17 +119,17 @@ public:
   		return N;
 	}
 	
-	// Вывести события конкретной даты
+	// Р’С‹РІРµСЃС‚Рё СЃРѕР±С‹С‚РёСЏ РєРѕРЅРєСЂРµС‚РЅРѕР№ РґР°С‚С‹
 	string Find(const Date& date) const
 	{
 		stringstream str;
-		for(const auto& i:DateEvents.at(date)) // для константного словаря
+		for(const auto& i:DateEvents.at(date)) // РґР»СЏ РєРѕРЅСЃС‚Р°РЅС‚РЅРѕРіРѕ СЃР»РѕРІР°СЂСЏ
 			str << i << endl;
 				
 		return str.str();
 	}
   
-	// Вывести все даты и события
+	// Р’С‹РІРµСЃС‚Рё РІСЃРµ РґР°С‚С‹ Рё СЃРѕР±С‹С‚РёСЏ
 	void Print() const
 	{
 		for (const auto& i:DateEvents)
@@ -149,9 +149,9 @@ int main() {
   	Database db;
   	string command;
   	
-  	while (getline(cin, command)) // в command поступает введённая строка целиком (до переноса строки)
+  	while (getline(cin, command)) // РІ command РїРѕСЃС‚СѓРїР°РµС‚ РІРІРµРґС‘РЅРЅР°СЏ СЃС‚СЂРѕРєР° С†РµР»РёРєРѕРј (РґРѕ РїРµСЂРµРЅРѕСЃР° СЃС‚СЂРѕРєРё)
 	{
-		// преобразуем строку command в поток a для дальнейшей работы:
+		// РїСЂРµРѕР±СЂР°Р·СѓРµРј СЃС‚СЂРѕРєСѓ command РІ РїРѕС‚РѕРє a РґР»СЏ РґР°Р»СЊРЅРµР№С€РµР№ СЂР°Р±РѕС‚С‹:
 		stringstream a; 
 		a << command;
 			
@@ -160,7 +160,7 @@ int main() {
 		if (c == "Add" | c=="Del" | c=="Find")
 		{
 			Date date;
-			// Проверяем номер месяца и дня
+			// РџСЂРѕРІРµСЂСЏРµРј РЅРѕРјРµСЂ РјРµСЃСЏС†Р° Рё РґРЅСЏ
 			try
 			{
 				a >> date;
@@ -175,27 +175,27 @@ int main() {
 			{
 				string event;
 				a >> event;
-				// Добавляем событие
+				// Р”РѕР±Р°РІР»СЏРµРј СЃРѕР±С‹С‚РёРµ
 				db.AddEvent(date, event);
 			}
-			else if(c == "Del")		//обработать >>
+			else if(c == "Del")		//РѕР±СЂР°Р±РѕС‚Р°С‚СЊ >>
 			{	
 				string event;
 				a >> event;
-				// Удаляем событие
-				if (a) //можно доработать с использованием eof
+				// РЈРґР°Р»СЏРµРј СЃРѕР±С‹С‚РёРµ
+				if (a) //РјРѕР¶РЅРѕ РґРѕСЂР°Р±РѕС‚Р°С‚СЊ СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј eof
 				{
 					if (db.DeleteEvent(date, event))
 						cout << "Deleted successfully" << endl;
 					else
 						cout << "Event not found" << endl;
 				}
-				else // Удаляем все события за текущую дату
+				else // РЈРґР°Р»СЏРµРј РІСЃРµ СЃРѕР±С‹С‚РёСЏ Р·Р° С‚РµРєСѓС‰СѓСЋ РґР°С‚Сѓ
 					cout << "Deleted " << db.DeleteDate(date) << " events" << endl;
 			}
-			else if(c == "Find")	//обработать >>
+			else if(c == "Find")	//РѕР±СЂР°Р±РѕС‚Р°С‚СЊ >>
 			{
-				try // Ловим исключение метода at
+				try // Р›РѕРІРёРј РёСЃРєР»СЋС‡РµРЅРёРµ РјРµС‚РѕРґР° at
 				{
 					cout << db.Find(date);
 				}
