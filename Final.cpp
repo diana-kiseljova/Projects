@@ -10,7 +10,7 @@ using namespace std;
 class Date {
 public:
 	Date(){}
-	Date(int y, int m, int d)
+	Date(int y, int m, int d) //год, месяц, день
 	{
 		if(m > 12 | m <= 0)
 			throw runtime_error("Month value is invalid: " + to_string(m));
@@ -183,7 +183,7 @@ int main() {
 				string event;
 				a >> event;
 				// Удаляем событие
-				if (a) //можно доработать с использованием eof
+				if (a) 
 				{
 					if (db.DeleteEvent(date, event))
 						cout << "Deleted successfully" << endl;
@@ -204,14 +204,14 @@ int main() {
 				}	
 			}
 		}
-		else if(c == "Print")	//ok
+		else if(c == "Print")	
 		{
 			db.Print();
 		}
-		else if (c == "")		//ok
+		else if (c == "")		
 		{
 		}
-		else 					//ok
+		else 					
 		{
 			cout << "Unknown command: " << c << endl;
 		}
